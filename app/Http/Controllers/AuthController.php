@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function signup(Request $request) {
+        error_log($request->input('password'));
+        error_log($request->input('confirmation'));
         $fields = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',

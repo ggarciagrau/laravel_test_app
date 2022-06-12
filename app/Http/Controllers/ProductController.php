@@ -26,11 +26,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->merge(['slug' => strtolower($request->name)]);
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'slug' => 'required'
         ]);
 
         return Product::create($request->all());
