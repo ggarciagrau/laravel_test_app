@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use Illuminate\Support\Facades\DB;
+
 return new class extends Migration
 {
     /**
@@ -13,14 +15,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->decimal('price', 4, 2);
-            $table->string('slug');
             $table->timestamps();
         });
+
+        DB::table('product_categories')->insert(
+            array(
+                'name' => 'Type A',
+            )
+        );
+
+        DB::table('product_categories')->insert(
+            array(
+                'name' => 'Type B',
+            )
+        );
     }
 
     /**
@@ -30,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('product_categories');
     }
 };

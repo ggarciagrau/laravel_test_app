@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        return Product::with("product_category")->get();
     }
 
     /**
@@ -31,6 +31,7 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
+            'id_category' => 'required'
         ]);
 
         return Product::create($request->all());
@@ -56,6 +57,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        error_log($request);
         $product = Product::find($id);
         $product->update($request->all());
         return $product;
